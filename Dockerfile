@@ -1,13 +1,14 @@
-# Base image based on openSUSE Leap 42
-FROM opensuse/leap:42
+# Base image based on openSUSE Leap 15
+FROM opensuse/leap:15
 LABEL maintainer="Fabien Crespel <fabien@crespel.net>"
 
 # Arguments
 ARG CONFD_VERSION="0.16.0"
 ARG CONFD_URL="https://github.com/kelseyhightower/confd/releases/download/v${CONFD_VERSION}/confd-${CONFD_VERSION}-linux-amd64"
 
-# Utilities
-RUN zypper in -y bzip2 curl file gzip iproute2 less net-tools openssh rdiff tar timezone unzip w3m wget which &&\
+# Utilities and system users
+RUN zypper in -y bzip2 curl file gzip iproute2 less net-tools openssh rdiff tar timezone unzip w3m wget which \
+	system-user-nobody system-user-wwwrun &&\
 	zypper clean -a
 
 # Confd
