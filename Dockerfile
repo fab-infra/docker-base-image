@@ -1,5 +1,5 @@
-# Base image based on openSUSE Leap 15
-FROM opensuse/leap:15
+# Base image based on openSUSE Leap 15.2
+FROM opensuse/leap:15.2
 LABEL maintainer="Fabien Crespel <fabien@crespel.net>"
 
 # Arguments
