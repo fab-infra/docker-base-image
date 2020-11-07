@@ -7,7 +7,7 @@ ARG CONFD_VERSION="0.16.0"
 ARG CONFD_URL="https://github.com/kelseyhightower/confd/releases/download/v${CONFD_VERSION}/confd-${CONFD_VERSION}-linux-amd64"
 
 # Utilities and system users
-RUN zypper in -y bzip2 curl file glibc-locale gzip iproute2 less net-tools openssh rdiff tar timezone unzip w3m wget which \
+RUN zypper in -y bzip2 curl file glibc-locale gzip iproute2 kubernetes-client less net-tools openssh rdiff tar timezone unzip w3m wget which \
 	system-user-nobody system-user-wwwrun &&\
 	zypper clean -a
 
