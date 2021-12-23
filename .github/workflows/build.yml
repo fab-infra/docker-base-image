@@ -18,12 +18,12 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@v2
+    - name: Set up QEMU
+      uses: docker/setup-qemu-action@v1
+      with:
+        platforms: arm64
     - name: Set up Docker Buildx
       uses: docker/setup-buildx-action@v1
-      with:
-        config-inline: |
-          [worker.oci]
-            max-parallelism = 1
     - name: Build and publish image
       run: |
         docker login -u ${{ github.actor }} -p ${{ secrets.GITHUB_TOKEN }} ${DOCKER_REGISTRY}
