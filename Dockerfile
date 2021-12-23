@@ -17,8 +17,7 @@ RUN curl -fsSL -o /usr/local/bin/confd ${CONFD_URL} &&\
 
 # Files
 COPY ./root /
-RUN chmod +x /entrypoint.sh /run.sh &&\
-	chmod a+rw /etc/passwd /etc/group &&\
+RUN chmod a+rw /etc/passwd /etc/group &&\
 	update-ca-certificates
 
 # Execution

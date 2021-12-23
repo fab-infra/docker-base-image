@@ -20,7 +20,11 @@ jobs:
       uses: actions/checkout@v2
     - name: Set up Docker Buildx
       uses: docker/setup-buildx-action@v1
+      with:
+        config-inline: |
+          [worker.oci]
+            max-parallelism = 1
     - name: Build and publish image
       run: |
         docker login -u ${{ github.actor }} -p ${{ secrets.GITHUB_TOKEN }} ${DOCKER_REGISTRY}
-        docker buildx build --platform ${DOCKER_PLATFORM} --tag ${DOCKER_REGISTRY}/${DOCKER_REPO}/${DOCKER_IMAGE}:$(basename $GITHUB_REF) --push .
+        docker buildx build --platform ${DOCKER_PLATFORM} --tag ${DOCKER_REGISTRY}/${DOCKER_REPO}/${DOCKER_IMAGE}:$(basename $GITHUB_REF) --label org.opencontainers.image.source=${{ github.server_url }}/${{ github.repository }} --push .
