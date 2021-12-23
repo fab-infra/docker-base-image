@@ -4,7 +4,7 @@ LABEL maintainer="Fabien Crespel <fabien@crespel.net>"
 
 # Arguments
 ARG CONFD_VERSION="0.16.0"
-ARG CONFD_URL="https://github.com/kelseyhightower/confd/releases/download/v${CONFD_VERSION}/confd-${CONFD_VERSION}-linux-amd64"
+ARG CONFD_BASE_URL="https://github.com/kelseyhightower/confd/releases/download/v${CONFD_VERSION}"
 
 # Utilities and system users
 RUN zypper in -y bzip2 curl file glibc-locale gzip iproute2 kubernetes-client less net-tools openssh rdiff tar timezone unzip w3m wget which \
@@ -12,7 +12,7 @@ RUN zypper in -y bzip2 curl file glibc-locale gzip iproute2 kubernetes-client le
 	zypper clean -a
 
 # Confd
-RUN curl -fsSL -o /usr/local/bin/confd ${CONFD_URL} &&\
+RUN curl -fsSL -o /usr/local/bin/confd ${CONFD_BASE_URL}/confd-${CONFD_VERSION}-linux-$(case $(uname -m) in x86_64) echo amd64 ;; aarch64) echo arm64 ;; esac) &&\
 	chmod +x /usr/local/bin/confd
 
 # Files
